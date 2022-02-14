@@ -1,4 +1,6 @@
-TARGET=build/iso2opl
+ISO2OPL=build/iso2opl
+OPL2ISO=build/opl2iso
+GENVMC=build/genvmc
 CC = gcc
 
 
@@ -9,21 +11,35 @@ ifeq ($(_WIN32),1)
 	CFLAGS += -D_WIN32
 endif
 
-OBJS = \
-	build/isofs.o \
-	build/iso2opl.o
+ISO2OPL_OBJS = \
+	obj/iso2opl/isofs.o \
+	obj/iso2opl/iso2opl.o
 
-all: $(TARGET)
+OPL2ISO_OBJS = \
+  obj/opl2iso/opl2iso.o
 
-rm-elf:
-	-rm -f $(TARGET) $(OBJS)
+GENVMC_OBJS = \
+	obj/genvmc/genvmc.o
 
-$(TARGET): $(OBJS)
-	$(CC) $(OBJS) -o $(TARGET) $(LIBS)
+all: $(ISO2OPL) $(OPL2ISO) $(GENVMC)
 
-build/%.o: src/%.c
+$(ISO2OPL): $(ISO2OPL_OBJS)
+	mkdir -p build
+	$(CC) $(ISO2OPL_OBJS) -o $(ISO2OPL) $(LIBS)
+
+$(OPL2ISO): $(OPL2ISO_OBJS)
+	mkdir -p build
+	$(CC) $(OPL2ISO_OBJS) -o $(OPL2ISO) $(LIBS)
+
+$(GENVMC): $(GENVMC_OBJS)
+	mkdir -p build
+	$(CC) $(GENVMC_OBJS) -o $(GENVMC) $(LIBS)
+
+obj/%.o: src/%.c
+	$(eval TMP_DIR=$(shell dirname "$@"))
+	mkdir -p $(TMP_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -r build/*
+	rm -r build obj
 
