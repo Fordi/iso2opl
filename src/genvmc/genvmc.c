@@ -396,9 +396,10 @@ err_out:
 //-----------------------------------------------------------------------
 int main(int argc, char **argv, char **env)
 {
-    if (argc != 3)
+    if (argc != 3) {
         printUsage();
-
+        return EXIT_FAILURE;
+    }
     int size_MB = strtol(argv[1], NULL, 10);
     if ((size_MB < 1) || (size_MB > 1024)) {
         printf("Error: VMC size_in_MB out of range...\n");
