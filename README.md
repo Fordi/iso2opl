@@ -30,8 +30,11 @@ Usage
 
 Simply put your PS2 USB mass storage device in the computer, mount it and type
 
-./iso2opl /xxxxxx/game.iso /yyyyyyy/massdevice "name of the game" [CD/DVD]
+```bash
+iso2opl /xxxxxx/game.iso /yyyyyyy/massdevice "name of the game" [CD/DVD]
+```
 
+If you didn't install, the command will be `build/iso2opl`.
 
 where:
  
@@ -43,4 +46,6 @@ where:
 
 Example:
 
-./iso2opl /home/user/game.iso /media/myusbstorage "awesome game" DVD
+```bash
+iso2opl /home/user/game.iso /media/myusbstorage "awesome game" DVD
+```
