@@ -12,11 +12,17 @@ git clone https://github.com/arcadenea/iso2opl.git .
 
 then type:
 
+```bash
 make
+```
 
+If everything goes fine, there will be a new file created named "build/iso2opl".
 
-If everything goes fine, there will be a new file created named "iso2opl".
+To install it for everyone on your system:
 
+```bash
+sudo make install
+```
 
 
 Usage
