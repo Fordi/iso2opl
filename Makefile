@@ -43,3 +43,5 @@ obj/%.o: src/%.c
 clean:
 	rm -r build obj
 
+install: all
+	cp build/* /usr/local/bin
