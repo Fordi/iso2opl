@@ -1,4 +1,4 @@
-TARGET=iso2opl
+TARGET=build/iso2opl
 CC = gcc
 
 
@@ -9,8 +9,9 @@ ifeq ($(_WIN32),1)
 	CFLAGS += -D_WIN32
 endif
 
-OBJS = isofs.o \
-iso2opl.o
+OBJS = \
+	build/isofs.o \
+	build/iso2opl.o
 
 all: $(TARGET)
 
@@ -20,12 +21,9 @@ rm-elf:
 $(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $(TARGET) $(LIBS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-%.o: %.cpp
+build/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -r $(OBJS) $(TARGET)
+	rm -r build/*
 
